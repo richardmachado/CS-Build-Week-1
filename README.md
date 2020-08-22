@@ -46,6 +46,7 @@ Recommend starting from scratch. That way you'll have a clean commit
 history and won't have to worry about merging changes from this
 informational repo in yours.
 
+
 ## Objectives
 
 * Student should be able to create a unique, high-quality project that
