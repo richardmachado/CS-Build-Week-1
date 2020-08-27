@@ -56,7 +56,7 @@ function GameofLife() {
   const [faster, setFaster] = useState(false);
 
   // States to confirm which grid size is being used and its size. I still have plans to make this variable. That is why it is not a simple true false boolean
-  const [size, setSize] = useState({rowNumber: 10, colNumber: 10})
+  const [size] = useState({rowNumber: 10, colNumber: 10})
   const [changeGridSize, setChangeGridSize] = useState(false);
   
   // A ref used to confirm and point out to the sim when it is active
