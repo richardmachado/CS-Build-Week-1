@@ -6,8 +6,23 @@ import '../App.css'
 // These are the initial variables we are using to set up the cells as well as the grid
 let rowNumber = 25
 let colNumber = 25
+
 let id = 0
-let cell = {alive: 0, id : id}
+let cell = { alive: 0, id: id }
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+
+
+
 
 // This is used when calculating the neighbors of each cell - the first value is for the X axis on the grid and the second is for the y axis
 const neighbors = [
@@ -77,7 +92,7 @@ function GameofLife() {
                 simCount += (oldGrid[newI][newM]).alive
               }
           })
-            if(oldGrid[i][m].alive == 0 && simCount == 3){
+            if(oldGrid[i][m].alive === 0 && simCount === 3){
               copy[i][m].alive = 1
             }else if(simCount < 2 || simCount > 3){
               copy[i][m].alive = 0
@@ -99,7 +114,7 @@ function GameofLife() {
                 simCount += (oldGrid[newI][newM]).alive
               }
             })
-            if(oldGrid[i][m].alive == 0 && simCount == 3){
+            if(oldGrid[i][m].alive === 0 && simCount === 3){
               copy[i][m].alive = 1
             }else if(simCount < 2 || simCount > 3){
               copy[i][m].alive = 0
@@ -120,11 +135,16 @@ function GameofLife() {
     setGrid((oldGrid) => {
       return runIt(oldGrid);
     });
-    count = count + 1
+    count = count +1
     setGenCounter(count)
+
+ 
 
     setTimeout(runSimulation, faster ? 1 : 1000);
   }, [faster]);
+
+ 
+
 
  
   // Here we are displaying what is on the screen itself
@@ -135,7 +155,7 @@ function GameofLife() {
         <h1>Conway's Game of Life</h1>
       </div>
      
-
+      <div className="all-buttons">
       <button // the first button runs the program itself. Changing the state and making sure the ref is true. it also runs the function run sim to make sure it will keep itterating
           class="buttons"
           style={{backgroundColor: !simOn ? '#1DDAA6': 'red', width:'100px', fontSize: "20px"}}
@@ -151,26 +171,18 @@ function GameofLife() {
           {simOn ? 'stop' : 'start'}
       </button>
 
-      {/* <button // the next button is to stop the program from running - simply by updating the state of simOn
-        class="buttons"
-        onClick={() => {
-          setSimOn(false);
-        }}
-      >
-        Stop
-      </button> */}
+
 
       <button // This button updates the speed to the faster setting by chaning the state controling the speed. This is referenced in the runSimulation function 
           class="buttons"
+          disabled={simOn}
           style={{backgroundColor: !faster ? 'pink': 'yellow', width:'100px', fontSize: "20px"}}
         onClick={() => {
           setFaster(!faster);
-        }}
-        
-      >
+         }}
+        >
         {faster ? 'lightspeed' : 'slow'}
       </button>
-
 
 
       <button // this button will clear the grid and reset it to 25x25
@@ -179,7 +191,6 @@ function GameofLife() {
         onClick={() => {
           setChangeGridSize(false)
           setSimOn(false);
- 
           setGrid(blankGrid());
           
         }}
@@ -189,38 +200,58 @@ function GameofLife() {
 
       <button // this button changes the grid size to 10x10 and updates the state to ensure it calculates neighbors correctly when the program is running
           class="buttons"
-          style={{width:'100px',height:'30px', fontSize: "12px"}}
+            disabled={simOn}
+            style={{width:'100px', fontSize: "20px"}}
         onClick={() => {
           const rows = []
           for(let i = 0; i < size.rowNumber; i++){
             rows.push(Array.from(Array(size.colNumber), () => cell))}
           setGrid(rows)
           setChangeGridSize(true)
-          setFaster(true)
+              setFaster(true);
+      
         }}
       >
-        Shrink to 10x10
+            10x10
+          </button>
+
+
+
+          <button // this button will clear the grid and reset it to 25x25
+          class="buttons"
+          style={{width:'100px', fontSize: "20px"}}
+        onClick={() => {
+          setChangeGridSize(false)
+          setSimOn(false);
+          setGrid(blankGrid());
+          
+        }}
+      >
+            25x25
       </button>
 
       <button // this button uses the randomGrid function to reset the grid to a randomized 25x25 grid
           class="buttons"
-          style={{width:'100px',height:'30px', fontSize: "12px"}}
+          style={{width:'100px', fontSize: "20px"}}
         onClick={() => {
           setChangeGridSize(false)
  
           setGrid(randomGrid());
         }}
       >
-          Random
+            Random
       </button>
-      <p>Generation: {genCounter}</p>
+        </div>
+        
+        <p>Generation: {genCounter}</p>
+        
       <div // In this div we are displaying the grid. Based on the size being used it will show differnt amounts. What is being shown in the div itself starting on line 145 is the grid and making each cell clickable. We are utilizing immer produce again in order to make a new copy of the grid when a cell is clicked - changing its status from dead to alive
         className="grid"
         style={!changeGridSize ? {
           display: "grid",
-          gridTemplateColumns: `repeat(${colNumber},30px)`, 
+          gridTemplateColumns: `repeat(${colNumber},25px)`, 
         } : {display: "grid",
-        gridTemplateColumns: `repeat(${size.colNumber},30px)`,}}
+        gridTemplateColumns: `repeat(${size.colNumber},25px)`,}}
       >
         {grid.map((rows, k) =>
           rows.map((columns, e) => (
@@ -242,9 +273,9 @@ function GameofLife() {
                 }
               }}
               style={{
-                width: 30,
-                height: 30,
-                backgroundColor: grid[k][e].alive ? "dodgerblue" : "black",
+                width: 25,
+                height: 25,
+                backgroundColor: grid[k][e].alive ? getRandomColor() : '#404142',
                 border: "dotted 1px white",
               }}
             ></div>
