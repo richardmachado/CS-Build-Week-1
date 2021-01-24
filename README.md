@@ -46,6 +46,7 @@ Recommend starting from scratch. That way you'll have a clean commit
 history and won't have to worry about merging changes from this
 informational repo in yours.
 
+
 ## Objectives
 
 * Student should be able to create a unique, high-quality project that
@@ -121,14 +122,14 @@ Write an algorithm that:
 Implement at least 3 of the following features:
 
 * Create a few sample cell configurations that users can load and run
-* Add an option that creates a random cell configuration that users can
+x Add an option that creates a random cell configuration that users can
   run
-* Add additional cell properties, like color or size, and incorporate
+x Add additional cell properties, like color or size, and incorporate
   them into your visualization
-* Allow users to specify the speed of the simulation
+x Allow users to specify the speed of the simulation
 * Provide functionality to manually step through the simulation one
   generation at a time, as opposed to animating automatically
-* Allow users to change the dimension of the grid being displayed
+x Allow users to change the dimension of the grid being displayed
 * Given a specific generation, calculate the configuration of cells at
   that point in time, and jump to that state, bypassing animation (i.e.
   skip ahead _n_ generations).
@@ -137,14 +138,14 @@ Implement at least 3 of the following features:
 
 #### About
 
-* On the main entry point of the application, include a separate section
+x On the main entry point of the application, include a separate section
   or link to another page or popup that describes the two main rules
   (birth & death) of Conway’s Game of Life
 
 ## Stretch Goals
 
 * Implement 2+ additional custom features, above
-* Deploy your app to a hosting service or, for iOS, to TestFlight (or
+x Deploy your app to a hosting service or, for iOS, to TestFlight (or
   the App Store!). Web devs can see [more deployment info
   here](resources/web/deployment).
 * Write a how-to guide or blog post that walks readers through the
